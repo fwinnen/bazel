@@ -45,6 +45,7 @@ final class AndroidNdkCrosstoolsR11 {
    * @return A CrosstoolRelease for the Android NDK.
    */
   public static CrosstoolRelease create(NdkPaths ndkPaths, StlImpl stlImpl, String hostPlatform) {
+    ndkPaths.setLegacyLibcxx(true);
     return CrosstoolRelease.newBuilder()
         .setMajorVersion("android")
         .setMinorVersion("")

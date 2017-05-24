@@ -40,11 +40,16 @@ public class NdkPaths {
   private final String repositoryName;
   private final String hostPlatform;
   private final ApiLevel apiLevel;
+  private boolean legacyLibcxx = false;
 
   public NdkPaths(String repositoryName, String hostPlatform, ApiLevel apiLevel) {
     this.repositoryName = repositoryName;
     this.hostPlatform = hostPlatform;
     this.apiLevel = apiLevel;
+  }
+
+  public void setLegacyLibcxx(boolean legacy) {
+    this.legacyLibcxx = legacy;
   }
 
   public ImmutableList<ToolPath> createToolpaths(String toolchainName, String targetPlatform,
@@ -213,8 +218,8 @@ public class NdkPaths {
         "external/%repositoryName%/ndk/sources/".replace("%repositoryName%", repositoryName);
 
     return ImmutableList.of(
-        prefix + "cxx-stl/llvm-libc++/libcxx/include",
-        prefix + "cxx-stl/llvm-libc++abi/libcxxabi/include",
+        prefix + "cxx-stl/llvm-libc++/%subFolder%include".replace("%subFolder%", legacyLibcxx ? "libcxx/" : ""),
+        prefix + "cxx-stl/llvm-libc++abi/%subFolder%include".replace("%subFolder%", legacyLibcxx ? "libcxxabi/" : ""),
         prefix + "android/support/include");
   }
 

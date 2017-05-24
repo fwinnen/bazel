@@ -24,14 +24,14 @@ import java.util.List;
  */
 public final class StlImpls {
 
-  public static final String DEFAULT_STL_NAME = "gnu-libstdcpp";
+  public static final String DEFAULT_STL_NAME = "libcpp";
   
   private StlImpls() {}
   
   public static class GnuLibStdCppStlImpl extends StlImpl {
 
     public GnuLibStdCppStlImpl(NdkPaths ndkPaths) {
-      super(DEFAULT_STL_NAME, ndkPaths);
+      super("gnu-libstdcpp", ndkPaths);
     }
 
     @Override
